@@ -20,6 +20,7 @@ class UserController extends Controller
         ], 200);
     }
 
+   
     /**
      * Show the form for creating a new resource.
      *
@@ -38,7 +39,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt( $request->password),
+        ]);
+
+        return response()->JSON([
+            'status' => 'User' .$user->id. ' is created',
+        ],200);
     }
 
     /**
